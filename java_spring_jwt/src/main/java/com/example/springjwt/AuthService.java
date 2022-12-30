@@ -23,6 +23,7 @@ public class AuthService {
 
     private static final int EXPIRATION_MINUTES = 5;
 
+    // NOTE: Require to describe random secret in application.properties
     @Value("${jwt.secret.key}")
     private String secretKey;
 
