@@ -1,8 +1,19 @@
 version: '3.8'
 
 services:
+  app:
+    container_name: kotlin-spring-restapi
+    image: zenika/kotlin:latest
+    working_dir: /app
+    volumes:
+      - ../:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    command: bash gradlew bootRun
   db:
-    container_name: practice
+    container_name: practice-mysql
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -13,4 +24,4 @@ services:
       - ./initdb.d:/docker-entrypoint-initdb.d
       - ./conf/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
-      - 3306:3306
+      - "3306:3306"
