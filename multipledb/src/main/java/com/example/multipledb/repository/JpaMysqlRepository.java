@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JpaMysqlRepository extends JpaRepository<MysqlEntity, String> {
 
-    @Query(value = "SELECT entity.name FROM MySqlEntity entity")
+    @Query(value = "SELECT entity.name FROM MysqlEntity entity")
     String fetchNameFromMysql();
 }

@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name = "mysql_db")
 @Entity
+@Table(name = "sample_table")
 public class MysqlEntity {
 
     @Id

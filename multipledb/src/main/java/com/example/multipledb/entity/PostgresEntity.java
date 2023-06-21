@@ -4,9 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-@Table(name = "postgres_db")
 @Entity
+@Table(name = "sample_table")
 public class PostgresEntity {
 
     @Id
