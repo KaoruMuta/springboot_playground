@@ -11,28 +11,28 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-public class DataSourceConfig {
+public class JdbcDataSourceConfig {
 
-    @Bean("mysqlDataSource")
+    @Bean("mysqlJdbcDataSource")
     @ConfigurationProperties("spring.datasource.mysql")
     @Primary
     public DataSource mysqlDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean("postgresqlDataSource")
+    @Bean("postgresqlJdbcDataSource")
     @ConfigurationProperties("spring.datasource.postgresql")
     public DataSource postgresqlDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean("mysql")
-    public JdbcTemplate createMysqlDataSource(@Qualifier("mysqlDataSource") DataSource dataSource) {
+    public JdbcTemplate createMysqlDataSource(@Qualifier("mysqlJdbcDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean("postgresql")
-    public JdbcTemplate createPostgresqlDataSource(@Qualifier("postgresqlDataSource") DataSource dataSource) {
+    public JdbcTemplate createPostgresqlDataSource(@Qualifier("postgresqlJdbcDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }
