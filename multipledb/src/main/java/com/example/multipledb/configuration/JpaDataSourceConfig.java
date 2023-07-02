@@ -21,7 +21,7 @@ import java.util.Objects;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.example.multipledb.entity",
+        basePackages = "com.example.multipledb.repository",
         entityManagerFactoryRef = "mysqlEntityManagerFactory",
         transactionManagerRef = "mysqlTransactionManager"
 )
@@ -29,7 +29,6 @@ public class JpaDataSourceConfig {
 
     @Bean("mysqlJpaDataSource")
     @ConfigurationProperties("spring.datasource.mysql")
-    @Primary
     public DataSource mysqlDataSource() {
         return DataSourceBuilder.create().build();
     }
