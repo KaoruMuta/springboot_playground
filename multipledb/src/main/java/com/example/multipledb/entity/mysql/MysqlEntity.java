@@ -1,4 +1,4 @@
-package com.example.multipledb.entity;
+package com.example.multipledb.entity.mysql;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "sample_table")
-public class PostgresEntity {
+public class MysqlEntity {
 
     @Id
     @Column(name = "ID")

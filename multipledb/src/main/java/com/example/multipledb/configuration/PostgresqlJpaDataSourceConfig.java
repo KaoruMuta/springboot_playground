@@ -17,34 +17,35 @@ import java.util.Objects;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.example.multipledb.repository",
-        entityManagerFactoryRef = "mysqlEntityManagerFactory",
-        transactionManagerRef = "mysqlTransactionManager"
+        basePackages = "com.example.multipledb.repository.postgresql",
+        entityManagerFactoryRef = "postgresqlEntityManagerFactory",
+        transactionManagerRef = "postgresqlTransactionManager"
 )
-public class JpaDataSourceConfig {
+public class PostgresqlJpaDataSourceConfig {
 
     @Bean
-    @ConfigurationProperties("spring.datasource.mysql")
-    public DataSource mysqlJpaDataSource() {
+    @ConfigurationProperties("spring.datasource.postgresql")
+    public DataSource postgresqlJpaDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(
+    public LocalContainerEntityManagerFactoryBean postgresqlEntityManagerFactory(
             EntityManagerFactoryBuilder builder,
-            @Qualifier("mysqlJpaDataSource") DataSource dataSource
+            @Qualifier("postgresqlJpaDataSource") DataSource dataSource
     ) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.example.multipledb.entity")
-                .persistenceUnit("mysqlTransactionManager")
+                .packages("com.example.multipledb.entity.postgresql")
+                .persistenceUnit("postgresqlTransactionManager")
                 .build();
     }
 
     @Bean
-    public JpaTransactionManager mysqlTransactionManager(
-            @Qualifier("mysqlEntityManagerFactory") LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory
+    public JpaTransactionManager postgresqlTransactionManager(
+        @Qualifier("postgresqlEntityManagerFactory") LocalContainerEntityManagerFactoryBean postgresqlEntityManagerFactory
     ) {
-        return new JpaTransactionManager(Objects.requireNonNull(mysqlEntityManagerFactory.getObject()));
+        return new JpaTransactionManager(Objects.requireNonNull(postgresqlEntityManagerFactory.getObject()));
     }
+
 }

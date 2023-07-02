@@ -1,8 +1,8 @@
 package com.example.multipledb.service;
 
 import com.example.multipledb.repository.JdbcRepository;
-import com.example.multipledb.repository.JpaMysqlRepository;
-import com.example.multipledb.repository.JpaPostgresqlRepository;
+import com.example.multipledb.repository.mysql.JpaMysqlRepository;
+import com.example.multipledb.repository.postgresql.JpaPostgresqlRepository;
 import org.springframework.stereotype.Service;
 
 @Service
