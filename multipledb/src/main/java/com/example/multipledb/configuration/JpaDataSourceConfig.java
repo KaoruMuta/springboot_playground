@@ -1,18 +1,14 @@
 package com.example.multipledb.configuration;
 
-import com.example.multipledb.entity.MysqlEntity;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -27,19 +23,13 @@ import java.util.Objects;
 )
 public class JpaDataSourceConfig {
 
-    @Bean("mysqlJpaDataSource")
+    @Bean
     @ConfigurationProperties("spring.datasource.mysql")
-    public DataSource mysqlDataSource() {
+    public DataSource mysqlJpaDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean("postgresqlJpaDataSource")
-    @ConfigurationProperties("spring.datasource.postgresql")
-    public DataSource postgresqlDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean("mysqlEntityManagerFactory")
+    @Bean
     public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("mysqlJpaDataSource") DataSource dataSource
