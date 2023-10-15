@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/sample_db
+      username: dbuser
+      password: userpass
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    postgresql:
+      jdbc-url: jdbc:postgresql://localhost:5432/sample_db
+      username: dbuser
+      password: userpass
+      driver-class-name: org.postgresql.Driver
