@@ -1,0 +1,58 @@
+DROP DATABASE IF EXISTS car_site_db;
+
+CREATE DATABASE car_site_db;
+
+USE car_site_db;
+
+CREATE TABLE cars (
+    id VARCHAR(36) NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    price INT(10) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+) DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE customers (
+    id VARCHAR(36) NOT NULL,
+    name VARCHAR(36) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE car_stocks (
+    car_id VARCHAR(36) NOT NULL,
+    quantity INT(10) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (car_id),
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
+) DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE customer_purchase_history (
+    id VARCHAR(36) NOT NULL,
+    customer_id VARCHAR(36) NOT NULL,
+    car_id VARCHAR(36) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
+) DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO cars (id, name, price) VALUES
+    ('508238a8-1bde-4943-a1b0-eb2c0b714ccf', 'プリウス', 10000),
+    ('e90442e9-63ba-4075-9f72-f2b82d4a0425', 'カローラ', 5000),
+    ('8c82c5e0-27a7-414d-b5c3-e0b9ba6f9049', 'ベンツ', 10000000);
+
+INSERT INTO customers (id, name) VALUES
+    ('b3e69e26-d3d8-49d7-aa4c-48cfc5eea684', '山田太郎'),
+    ('14c3bea7-f550-4fd8-bc13-9e3d97118a1c', '田中太郎');
+
+INSERT INTO car_stocks (car_id, quantity) VALUES
+    ('508238a8-1bde-4943-a1b0-eb2c0b714ccf', 3),
+    ('e90442e9-63ba-4075-9f72-f2b82d4a0425', 1),
+    ('8c82c5e0-27a7-414d-b5c3-e0b9ba6f9049', 0);
+
+INSERT INTO customer_purchase_history (id, customer_id, car_id) VALUES
+    ('c0a43d1e-95a9-4649-9994-ed718fa5bf01', '14c3bea7-f550-4fd8-bc13-9e3d97118a1c', '8c82c5e0-27a7-414d-b5c3-e0b9ba6f9049');
