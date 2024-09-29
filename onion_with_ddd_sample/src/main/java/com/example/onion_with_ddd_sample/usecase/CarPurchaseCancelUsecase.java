@@ -14,7 +14,7 @@ public class CarPurchaseCancelUsecase {
     }
 
     public void execute(CarPurchaseCancelUsecaseInput input) {
-        // NOTE:
+        // NOTE: 在庫のみの更新のため、複数集約の整合性を保つ必要がないため、usecase内で完結させている
         Stock stock = stockRepository.findCarStock(input.carId());
         Stock stockAfterCancel = stock.increase();
         stockRepository.updateStock(stockAfterCancel);
