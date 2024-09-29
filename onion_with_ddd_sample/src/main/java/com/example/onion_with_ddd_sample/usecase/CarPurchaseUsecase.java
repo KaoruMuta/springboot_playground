@@ -25,6 +25,7 @@ public class CarPurchaseUsecase {
         Stock stockAfterPurchase = stock.decrease();
         Customer customer = new Customer(input.customerId(), input.customerName());
         CustomerPurchaseHistory history = new CustomerPurchaseHistory(UUID.randomUUID().toString(), input.carId(), input.customerId());
+        // NOTE: 整合性を担保したいモデル(集約)間を、1トランザクションで更新する (aggregatorとしての役割)
         purchaseWriteService.execute(stockAfterPurchase, customer, history);
     }
 }
