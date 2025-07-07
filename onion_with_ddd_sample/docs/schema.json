@@ -1,0 +1,321 @@
+{
+  "name": "car_site_db",
+  "tables": [
+    {
+      "name": "car_stocks",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "car_id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (car_id) USING BTREE",
+          "table": "car_stocks",
+          "columns": [
+            "car_id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "car_stocks_ibfk_1",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (car_id) REFERENCES cars (id)",
+          "table": "car_stocks",
+          "referenced_table": "cars",
+          "columns": [
+            "car_id"
+          ],
+          "referenced_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (car_id)",
+          "table": "car_stocks",
+          "columns": [
+            "car_id"
+          ]
+        }
+      ],
+      "def": "CREATE TABLE `car_stocks` (\n  `car_id` varchar(36) NOT NULL,\n  `quantity` int NOT NULL,\n  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`car_id`),\n  CONSTRAINT `car_stocks_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3"
+    },
+    {
+      "name": "cars",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "varchar(20)",
+          "nullable": false
+        },
+        {
+          "name": "price",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (id) USING BTREE",
+          "table": "cars",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "cars",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "def": "CREATE TABLE `cars` (\n  `id` varchar(36) NOT NULL,\n  `name` varchar(20) NOT NULL,\n  `price` int NOT NULL,\n  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3"
+    },
+    {
+      "name": "customer_purchase_history",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "customer_id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "car_id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "car_id",
+          "def": "KEY car_id (car_id) USING BTREE",
+          "table": "customer_purchase_history",
+          "columns": [
+            "car_id"
+          ]
+        },
+        {
+          "name": "customer_id",
+          "def": "KEY customer_id (customer_id) USING BTREE",
+          "table": "customer_purchase_history",
+          "columns": [
+            "customer_id"
+          ]
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (id) USING BTREE",
+          "table": "customer_purchase_history",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "customer_purchase_history_ibfk_1",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (customer_id) REFERENCES customers (id)",
+          "table": "customer_purchase_history",
+          "referenced_table": "customers",
+          "columns": [
+            "customer_id"
+          ],
+          "referenced_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "customer_purchase_history_ibfk_2",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (car_id) REFERENCES cars (id)",
+          "table": "customer_purchase_history",
+          "referenced_table": "cars",
+          "columns": [
+            "car_id"
+          ],
+          "referenced_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "customer_purchase_history",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "def": "CREATE TABLE `customer_purchase_history` (\n  `id` varchar(36) NOT NULL,\n  `customer_id` varchar(36) NOT NULL,\n  `car_id` varchar(36) NOT NULL,\n  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `customer_id` (`customer_id`),\n  KEY `car_id` (`car_id`),\n  CONSTRAINT `customer_purchase_history_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,\n  CONSTRAINT `customer_purchase_history_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3"
+    },
+    {
+      "name": "customers",
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "varchar(36)",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra_def": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (id) USING BTREE",
+          "table": "customers",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "customers",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "def": "CREATE TABLE `customers` (\n  `id` varchar(36) NOT NULL,\n  `name` varchar(36) NOT NULL,\n  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3"
+    }
+  ],
+  "relations": [
+    {
+      "table": "car_stocks",
+      "columns": [
+        "car_id"
+      ],
+      "cardinality": "zero_or_one",
+      "parent_table": "cars",
+      "parent_columns": [
+        "id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (car_id) REFERENCES cars (id)"
+    },
+    {
+      "table": "customer_purchase_history",
+      "columns": [
+        "customer_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "customers",
+      "parent_columns": [
+        "id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (customer_id) REFERENCES customers (id)"
+    },
+    {
+      "table": "customer_purchase_history",
+      "columns": [
+        "car_id"
+      ],
+      "cardinality": "zero_or_more",
+      "parent_table": "cars",
+      "parent_columns": [
+        "id"
+      ],
+      "parent_cardinality": "exactly_one",
+      "def": "FOREIGN KEY (car_id) REFERENCES cars (id)"
+    }
+  ],
+  "driver": {
+    "name": "mysql",
+    "database_version": "8.0.33",
+    "meta": {
+      "dict": {
+        "Functions": "Stored procedures and functions"
+      }
+    }
+  }
+}

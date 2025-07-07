@@ -1,0 +1,12 @@
+dsn: mysql://dbuser:userpass@localhost:3306/car_site_db
+docPath: docs
+er:
+  skip: false
+  format: mermaid
+  comment: true
+  hideDef: true
+  showColumnTypes:
+    related: true
+    primary: true
+  distance: 2
+  font: M+

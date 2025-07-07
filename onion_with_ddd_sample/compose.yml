@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: car_site_db
       MYSQL_USER: dbuser
       MYSQL_PASSWORD: userpass
-    volumes:  # initialize database
+    volumes: # initialize database
       - ./mysql/my.cnf:/etc/my.cnf
       - ./mysql/initdb.d:/docker-entrypoint-initdb.d
     ports:
