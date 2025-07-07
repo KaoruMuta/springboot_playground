@@ -1,0 +1,275 @@
+{
+  "tables": {
+    "car_stocks": {
+      "name": "car_stocks",
+      "comment": null,
+      "columns": {
+        "car_id": {
+          "name": "car_id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "int",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "PRIMARY": {
+          "name": "PRIMARY",
+          "unique": false,
+          "columns": [
+            "car_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "car_stocks_ibfk_1": {
+          "type": "FOREIGN KEY",
+          "name": "car_stocks_ibfk_1",
+          "columnName": "car_id",
+          "targetTableName": "cars",
+          "targetColumnName": "id",
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "NO_ACTION"
+        },
+        "PRIMARY": {
+          "type": "PRIMARY KEY",
+          "name": "PRIMARY",
+          "columnName": "car_id"
+        }
+      }
+    },
+    "cars": {
+      "name": "cars",
+      "comment": null,
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(20)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "int",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "PRIMARY": {
+          "name": "PRIMARY",
+          "unique": false,
+          "columns": [
+            "id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "PRIMARY": {
+          "type": "PRIMARY KEY",
+          "name": "PRIMARY",
+          "columnName": "id"
+        }
+      }
+    },
+    "customer_purchase_history": {
+      "name": "customer_purchase_history",
+      "comment": null,
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "car_id": {
+          "name": "car_id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "car_id": {
+          "name": "car_id",
+          "unique": false,
+          "columns": [
+            "car_id"
+          ],
+          "type": "btree"
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "unique": false,
+          "columns": [
+            "customer_id"
+          ],
+          "type": "btree"
+        },
+        "PRIMARY": {
+          "name": "PRIMARY",
+          "unique": false,
+          "columns": [
+            "id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "customer_purchase_history_ibfk_1": {
+          "type": "FOREIGN KEY",
+          "name": "customer_purchase_history_ibfk_1",
+          "columnName": "customer_id",
+          "targetTableName": "customers",
+          "targetColumnName": "id",
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "NO_ACTION"
+        },
+        "customer_purchase_history_ibfk_2": {
+          "type": "FOREIGN KEY",
+          "name": "customer_purchase_history_ibfk_2",
+          "columnName": "car_id",
+          "targetTableName": "cars",
+          "targetColumnName": "id",
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "NO_ACTION"
+        },
+        "PRIMARY": {
+          "type": "PRIMARY KEY",
+          "name": "PRIMARY",
+          "columnName": "id"
+        }
+      }
+    },
+    "customers": {
+      "name": "customers",
+      "comment": null,
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(36)",
+          "default": null,
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "default": "CURRENT_TIMESTAMP",
+          "check": null,
+          "comment": null,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "PRIMARY": {
+          "name": "PRIMARY",
+          "unique": false,
+          "columns": [
+            "id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "PRIMARY": {
+          "type": "PRIMARY KEY",
+          "name": "PRIMARY",
+          "columnName": "id"
+        }
+      }
+    }
+  }
+}
